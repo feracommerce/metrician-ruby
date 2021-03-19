@@ -5,6 +5,7 @@ module Metrician
                                 "X-Queue-Start".freeze,
                                 "X-REQUEST-START".freeze,
                                 "X_REQUEST_START".freeze,
+                                "HTTP_X_REQUEST_START".freeze,
                                 "HTTP_X_QUEUE_START".freeze]
     ENV_CONTROLLER_PATH      = "action_controller.instance".freeze
     ENV_REQUEST_PATH         = "REQUEST_PATH".freeze
