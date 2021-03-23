@@ -115,7 +115,19 @@ module Metrician
         end
         return if no_queue_start_marker?
         result = env[queue_start_marker].to_f
-        result > 1_000_000_000 ? result : nil
+
+        # Number is too small then we probably don't know the request queue time.
+        # so skip reporting
+        return nil if result < 1_000_000_000
+
+        # If the number is > current time x 10, then it is most likely in millseconds
+        # so divide the number by 1000.
+        if result > Time.now.to_f * 10
+          result = result / 1000
+        end
+
+
+        result
       end
 
       def self.no_queue_start_marker?
